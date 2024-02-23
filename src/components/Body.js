@@ -1,12 +1,13 @@
  
 import React from 'react';
 import RestaurantCard from "./RestrauntCard";
-import { useState ,useEffect } from "react";
+import { useState ,useEffect ,useContext} from "react";
 // import resList from "../utils/mockData";
 import useOnlineStatus from '../utils/useOnlineStatus';
 import { Link } from 'react-router-dom';
 import { Restaurant_API } from '../utils/constant';
 import Shimmer from  './Shimmer';
+// import UserContext from "../utils/UserContext";
 
 
 
@@ -47,7 +48,9 @@ const Body = () => {
     }
 
     const handleSearch = () => {
-      const filteredRestaurant = ListOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
+      const filteredRestaurant = ListOfRestaurant.filter((res) => 
+      res.info.name.toLowerCase().includes(searchText.toLowerCase())
+      );
       setFilteredRestaurant(filteredRestaurant);
     }
 
@@ -59,30 +62,37 @@ const Body = () => {
 
     if(ListOfRestaurant===null)  { return <Shimmer/>}
 
+    // const {setUserInfo, loggedInUser} =useContext(UserContext);
+
   return (
      <div className="body">
 
         <div className="filter flex">
 
-        <div className="search m-1 p-2">
+          <div className="search m-1 p-2">
          
-          <input
-           type="text" 
-           className="border border-solid border-black rounded-md m-2 p-2"
-           value={searchText}
-           onChange={(e)=>setSearchText(e.target.value)}
-           onKeyPress={handleKeyPress}
+           <input
+             type="text" 
+             className="border border-solid border-black rounded-md m-2 p-2"
+             value={searchText}
+             onInput={(e)=>{
+             const value= e.target.value;
+             setSearchText(value);
+             if(value.trim()==="") { setFilteredRestaurant(ListOfRestaurant);}
+             else{handleSearch(value)}
+             }
+           }
+            onKeyPress={handleKeyPress}
            />
            <button
             className="px-4 py-2 bg-green-200 m-2 rounded-md"
             onClick={handleSearch}
           >
             Search
-          </button>
+          </button> 
         </div>
 
           <div className="p-2 m-1 flex items-center">
-
           <button 
               className="filter-btn px-4 py-2 bg-gray-200 rounded-md"
             onClick={()=>{
@@ -95,6 +105,16 @@ const Body = () => {
             top-rated Restaurant
            </button>
           </div>
+
+          {/* <div className="p-2 m-1 flex items-center" >
+            <label>UserName: </label>
+           <input 
+           className="border border-black p-2 m-2 "
+           value={loggedInUser || " "}
+           onChange={(e) => setUserInfo(e.target.value)}
+           
+           />
+          </div> */}
          
         </div>
 

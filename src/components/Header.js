@@ -14,7 +14,7 @@ const Header = () => {
 const [btnName, setBtnName] =useState("Login");
 
 const {loggedInUser}= useContext(UserContext)
-console.log(loggedInUser);
+// console.log(loggedInUser);
 
 const onlineStatus= useOnlineStatus();
 
@@ -44,10 +44,11 @@ const onlineStatus= useOnlineStatus();
            className="login" 
            onClick={() => {
             btnName==="Login" ? setBtnName("Logout") : setBtnName("Login");
-            console.log(btnName);
+            
            }}
            >
-            {btnName}
+            <Link to="/log"> {btnName}</Link>
+           
          </button>
          <li  className="px-4 font-bold ">{loggedInUser}</li>
         </ul>
