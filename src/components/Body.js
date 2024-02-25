@@ -1,7 +1,7 @@
  
 import React from 'react';
 import RestaurantCard from "./RestrauntCard";
-import { useState ,useEffect ,useContext} from "react";
+import { useState ,useEffect  } from "react";
 // import resList from "../utils/mockData";
 import useOnlineStatus from '../utils/useOnlineStatus';
 import { Link } from 'react-router-dom';
@@ -64,16 +64,19 @@ const Body = () => {
 
     // const {setUserInfo, loggedInUser} =useContext(UserContext);
 
+    
   return (
      <div className="body">
+      
 
-        <div className="filter flex">
+        {/* <div className="filter flex justify-between m-4 p-2  rounded-lg  border  shadow-inner bg-cover bg-center" style={{backgroundImage: "https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-food-delivery-meal-fashion-poster-background-yellow-back-image_158378.jpg"}}> */}
+        <div className="filter flex justify-between m-4 p-2 rounded-lg border shadow-inner bg-cover bg-center" style={{backgroundImage: "url(https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-food-delivery-meal-fashion-poster-background-yellow-back-image_158378.jpg)"}}>
 
           <div className="search m-1 p-2">
          
            <input
              type="text" 
-             className="border border-solid border-black rounded-md m-2 p-2"
+             className="border border-solid border-black rounded-md  p-2   w-96 ml-20"
              value={searchText}
              onInput={(e)=>{
              const value= e.target.value;
@@ -85,16 +88,16 @@ const Body = () => {
             onKeyPress={handleKeyPress}
            />
            <button
-            className="px-4 py-2 bg-green-200 m-2 rounded-md"
+            className="px-8 py-2 bg-green-300 m-2 rounded-md"
             onClick={handleSearch}
           >
             Search
           </button> 
         </div>
 
-          <div className="p-2 m-1 flex items-center">
+          <div className="p-2 ml-10 flex items-center">
           <button 
-              className="filter-btn px-4 py-2 bg-gray-200 rounded-md"
+              className="filter-btn px-8 py-2 bg-blue-400 rounded-md shadow-inner"
             onClick={()=>{
             const filteredList= filteredRestaurant.filter(
             (res) => res.info.avgRating > 4.3
@@ -104,18 +107,7 @@ const Body = () => {
            >
             top-rated Restaurant
            </button>
-          </div>
-
-          {/* <div className="p-2 m-1 flex items-center" >
-            <label>UserName: </label>
-           <input 
-           className="border border-black p-2 m-2 "
-           value={loggedInUser || " "}
-           onChange={(e) => setUserInfo(e.target.value)}
-           
-           />
-          </div> */}
-         
+          </div>         
         </div>
 
         <div className="flex flex-wrap">

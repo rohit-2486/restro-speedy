@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Body from "./components/Body";
 import { createBrowserRouter , RouterProvider , Outlet} from "react-router-dom";
 import About from "./components/About";
@@ -9,7 +10,10 @@ import Log from  './components/Log';
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from  "./utils/UserContext";
-// import { UserProvider } from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
+
 const AppLayout = () => {
 
 const[userInfo,setUserInfo]= useState();
@@ -24,15 +28,17 @@ useEffect(()=>{
 },[])
 
   return (
+    <Provider store={appStore}>
     <UserContext.Provider value={{loggedInUser : userInfo , setUserInfo}}>
         
       <div className="app">
         <Header /> 
         <Outlet />
+        <Footer/ >
       </ div>
       
     </UserContext.Provider>
-       
+    </Provider>  
   );
 };
 
@@ -60,6 +66,9 @@ const appRouter=createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu/>,
+      },{
+        path: "/cart",
+        element: <Cart/>,
       },
 
     ],
