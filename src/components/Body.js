@@ -60,7 +60,7 @@ const Body = () => {
       }
    }
 
-    if(ListOfRestaurant===null)  { return <Shimmer/>}
+    if(ListOfRestaurant.length===0)  { return <Shimmer/>}
 
     // const {setUserInfo, loggedInUser} =useContext(UserContext);
 
